@@ -108,7 +108,7 @@ function handleClick(index) {
     cells[index].innerText = currentPlayer;
     cells[index].classList.add(currentPlayer);
     if (checkWinner(currentPlayer)) {
-      resultDisplay.innerText = (currentPlayer === 'X' ? 'Ayush' : 'Aman') + ' won!';
+      resultDisplay.innerText = (currentPlayer === 'X' ? 'X' : 'O') + ' won!';
       resultDisplay.classList.add('winner');
       return;
     } else if (board.every(cell => cell !== '')) {
