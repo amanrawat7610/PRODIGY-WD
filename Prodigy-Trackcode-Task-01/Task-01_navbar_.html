@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Stylish single Page Website</title> 
+  <link rel="stylesheet" href="styles.css"> 
+ <style type="text/css" id="dcoder_stylesheet">body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000; /* Black background color */
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  display: inline;
+  margin: 0 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+a:hover {
+  color: #ffd700; /* Change color on hover */
+}
+
+.active {
+  color: #ffd700; /* Change color for active link */
+}
+
+.section {
+  padding: 20px 0; /* Reduced padding top and bottom */
+  text-align: center;
+}
+
+h2 {
+  color: #ff0000; /* Red text color */
+}
+
+.search-container {
+  text-align: center;
+  margin-top: 5px; /* Further reduced margin top */
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-right: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}</style></head> 
+ <body> 
+  <header> 
+   <h1>Hello😊, I am Aman Singh Rawat</h1> 
+  </header> 
+  <nav> 
+   <ul> 
+    <li><a href="#" onclick="scrollToSection('home')">Home</a></li> 
+    <li><a href="#" onclick="scrollToSection('about')">About</a></li> 
+    <li><a href="#" onclick="scrollToSection('biodata')">biodata</a></li> 
+    <li><a href="#" onclick="scrollToSection('contact')">Contact</a></li> 
+   </ul> 
+  </nav> 
+  <section id="home" class="section"> 
+   <h2>Home Section</h2> <!-- Content for the home section --> 
+  </section> 
+  <section id="about" class="section"> 
+   <h2>About Section</h2> <!-- Content for the about section --> 
+  </section> 
+  <section id="biodata" class="section"> 
+   <h2>biodata Section</h2> <!-- Content for the biodata section --> 
+  </section> 
+  <section id="contact" class="section"> 
+   <h2>Contact Section</h2> <!-- Content for the contact section --> 
+  </section> 
+  <div class="search-container"> 
+   <input type="text" placeholder="Search..." id="searchInput"> <button onclick="search()">Search</button> 
+  </div> 
+  <script src="script.js"></script> 
+ 
+<script type="text/javascript" id="dcoder_script">function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  section.scrollIntoView({ behavior: 'smooth' });
+
+  // Remove active class from all links
+  const links = document.querySelectorAll('nav a');
+  links.forEach(link => link.classList.remove('active'));
+
+  // Add active class to clicked link
+  event.target.classList.add('active');
+}</script></body></html>
