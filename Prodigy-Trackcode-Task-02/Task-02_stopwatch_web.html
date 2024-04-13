@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+  <link rel="stylesheet" href="styles.css">
+<style type="text/css" id="dcoder_stylesheet">body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, orange, yellow);
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+.stopwatch {
+  position: relative;
+  background-color: transparent;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#display {
+  font-size: 2em;
+  margin: 0;
+}
+
+button {
+  font-size: 1em;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button#startStop {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button#lap {
+  background-color: #008CBA;
+  color: white;
+}
+
+button#reset {
+  background-color: #f44336;
+  color: white;
+}
+
+.lap-times {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 5px;
+}</style></head>
+<body>
+  <div class="container">
+    <h1>Stopwatch</h1>
+    <div class="stopwatch">
+      <div class="circle">
+        <p id="display">00:00:00</p>
+      </div>
+      <button id="startStop" onclick="startStop()">Start</button>
+      <button id="lap" onclick="lap()">Lap</button>
+      <button id="reset" onclick="reset()">Reset</button>
+    </div>
+    <div class="lap-times">
+      <p>Lap Times:</p>
+      <ul id="lapList"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+
+<script type="text/javascript" id="dcoder_script">let timer;
+let running = false;
+let lapCounter = 0;
+
+function startStop() {
+  if (running) {
+    clearInterval(timer);
+    document.getElementById("startStop").textContent = "Start";
+    running = false;
+  } else {
+    timer = setInterval(run, 10);
+    document.getElementById("startStop").textContent = "Stop";
+    running = true;
+  }
+}
+
+function reset() {
+  clearInterval(timer);
+  document.getElementById("display").textContent = "00:00:00";
+  document.getElementById("startStop").textContent = "Start";
+  running = false;
+  lapCounter = 0;
+  document.getElementById("lapList").innerHTML = "";
+}
+
+function run() {
+  let display = document.getElementById("display");
+  let time = display.textContent;
+  let splitted = time.split(":");
+  let minutes = parseInt(splitted[0]);
+  let seconds = parseInt(splitted[1]);
+  let milliseconds = parseInt(splitted[2]);
+
+  milliseconds += 1;
+  if (milliseconds >= 100) {
+    milliseconds = 0;
+    seconds += 1;
+  }
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes += 1;
+  }
+
+  display.textContent =
+    (minutes < 10 ? "0" : "") + minutes + ":" +
+    (seconds < 10 ? "0" : "") + seconds + ":" +
+    (milliseconds < 10 ? "0" : "") + milliseconds;
+}
+
+function lap() {
+  let lapList = document.getElementById("lapList");
+  let lapTime = document.getElementById("display").textContent;
+  let lapItem = document.createElement("li");
+  lapItem.textContent = "Lap " + (++lapCounter) + ": " + lapTime;
+  lapList.insertBefore(lapItem, lapList.childNodes[0]);
+}</script></body></html>
