@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="styles.css">
+<style type="text/css" id="dcoder_stylesheet">body {
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 2px;
+  border: 4px solid orange;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: #ddd;
+}
+
+.cell.X {
+  color: red;
+}
+
+.cell.O {
+  color: yellow;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.5em;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid red;
+  color: red;
+}
+
+.result.winner {
+  color: green;
+}
+
+.clear-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #fff;
+  border: 2px solid red;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.clear-button:hover {
+  background-color: red;
+  color: white;
+}</style></head>
+<body>
+  <div class="container">
+    <div id="board" class="board">
+      <div class="cell" onclick="handleClick(0)"></div>
+      <div class="cell" onclick="handleClick(1)"></div>
+      <div class="cell" onclick="handleClick(2)"></div>
+      <div class="cell" onclick="handleClick(3)"></div>
+      <div class="cell" onclick="handleClick(4)"></div>
+      <div class="cell" onclick="handleClick(5)"></div>
+      <div class="cell" onclick="handleClick(6)"></div>
+      <div class="cell" onclick="handleClick(7)"></div>
+      <div class="cell" onclick="handleClick(8)"></div>
+    </div>
+    <div id="result" class="result"></div>
+    <button onclick="resetGame()" class="clear-button">Clear</button>
+  </div>
+
+  <script src="script.js"></script>
+
+<script type="text/javascript" id="dcoder_script">let currentPlayer = 'X';
+let cells = Array.from(document.querySelectorAll('.cell'));
+let board = ['', '', '', '', '', '', '', '', ''];
+let resultDisplay = document.getElementById('result');
+
+function handleClick(index) {
+  if (board[index] === '') {
+    board[index] = currentPlayer;
+    cells[index].innerText = currentPlayer;
+    cells[index].classList.add(currentPlayer);
+    if (checkWinner(currentPlayer)) {
+      resultDisplay.innerText = (currentPlayer === 'X' ? 'Ayush' : 'Aman') + ' won!';
+      resultDisplay.classList.add('winner');
+      return;
+    } else if (board.every(cell => cell !== '')) {
+      resultDisplay.innerText = 'Draw match!';
+      return;
+    }
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  }
+}
+
+function checkWinner(player) {
+  const winConditions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+    [0, 4, 8], [2, 4, 6] // diagonals
+  ];
+
+  return winConditions.some(combination =>
+    combination.every(index => board[index] === player)
+  );
+}
+
+function resetGame() {
+  currentPlayer = 'X';
+  cells.forEach(cell => {
+    cell.innerText = '';
+    cell.classList.remove('X', 'O');
+  });
+  board = ['', '', '', '', '', '', '', '', ''];
+  resultDisplay.innerText = '';
+  resultDisplay.classList.remove('winner');
+}</script></body></html>
